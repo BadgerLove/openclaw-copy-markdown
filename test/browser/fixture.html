@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OpenClaw fixture</title>
+    <style>
+      body { font: 15px/1.5 sans-serif; margin: 30px; }
+      .chat-thread { user-select: none; -webkit-user-select: none; }
+      .chat-text { user-select: text; -webkit-user-select: text; }
+      .code-block-header { user-select: none; }
+      .gone { display: none; }
+    </style>
+  </head>
+  <body>
+    <openclaw-app>
+      <div class="chat-thread">
+        <div class="chat-group">
+          <span class="chat-sender">Agent</span><time>12:01</time>
+          <div class="chat-bubble" id="b1">
+            <div class="chat-text">
+              <h2 id="h">Plan for <code>nginx</code></h2>
+              <p id="p1">Here is <strong>the fix</strong>, with <em>one</em> caveat and a <a href="https://example.com/docs">link</a>.</p>
+              <ol id="ol"><li>one</li><li id="li2">two</li><li id="li3">three</li><li>four</li></ol>
+              <div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-lang">bash</span><div class="code-block-actions"><button type="button" class="code-block-copy">Copy</button></div></div><div class="code-block-viewport"><pre><code class="hljs language-bash"><span class="hljs-built_in">cd</span> /etc/nginx
+nginx -t
+</code></pre></div></div>
+              <table><thead><tr><th>Service</th><th>Port</th><th>Status</th></tr></thead><tbody><tr><td>plex</td><td>32400</td><td>up</td></tr><tr><td>sonarr</td><td>8989</td><td>down</td></tr></tbody></table>
+              <p class="gone">invisible</p>
+            </div>
+            <div class="chat-actions"><button>Copy</button><button>Reply</button></div>
+          </div>
+        </div>
+        <div class="chat-group">
+          <span class="chat-sender">Agent</span><time>12:02</time>
+          <div class="chat-bubble" id="b2"><div class="chat-text"><p id="p2">Second message with snake_case and 2 * 3.</p></div></div>
+        </div>
+      </div>
+      <p id="outside" style="margin-top:40px">Sidebar-ish text outside the chat.</p>
+      <textarea id="paste" rows="3" cols="40"></textarea>
+    </openclaw-app>
+    <script>
+      // Same shape as OpenClaw's chat handler: a document-level (delegated)
+      // listener that cancels the browser menu and opens its own.
+      window.__appMenus = 0;
+      document.addEventListener('contextmenu', (e) => {
+        if (!e.target.closest || !e.target.closest('.chat-bubble')) return;
+        e.preventDefault();
+        e.stopPropagation();
+        window.__appMenus++;
+      });
+    </script>
+  </body>
+</html>

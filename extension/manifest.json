@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Copy as Markdown for OpenClaw (unofficial)",
+  "short_name": "Copy as Markdown",
+  "version": "1.2.0",
+  "description": "Copy selected text from the OpenClaw Control UI as clean Markdown, ready to paste into Discord.",
+  "minimum_chrome_version": "123",
+  "permissions": ["activeTab", "contextMenus", "clipboardWrite", "scripting", "storage"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Copy as Markdown for OpenClaw",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "copy-selection-md": {
+      "suggested_key": {
+        "default": "Alt+Shift+C",
+        "mac": "Alt+Shift+C"
+      },
+      "description": "Copy selection as Markdown"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

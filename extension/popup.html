@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Copy as Markdown for OpenClaw</title>
+    <style>
+      body {
+        font: 13px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 14px 16px;
+        width: 290px;
+        color-scheme: light dark;
+      }
+      h1 {
+        font-size: 13px;
+        margin: 0 0 8px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      .host {
+        font-weight: 600;
+        word-break: break-all;
+      }
+      .muted {
+        opacity: 0.7;
+      }
+      button {
+        font: inherit;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 7px;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+      #enable {
+        background: #d9453b;
+        color: #fff;
+      }
+      #disable {
+        background: transparent;
+        border-color: currentColor;
+        opacity: 0.8;
+      }
+      a {
+        color: inherit;
+      }
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Copy as Markdown for OpenClaw</h1>
+    <p id="status" role="status">Checking this page…</p>
+    <p id="hint" class="muted" hidden></p>
+    <p>
+      <button id="enable" hidden>Enable on this site</button>
+      <button id="disable" hidden>Turn off on this site</button>
+    </p>
+    <p class="muted"><a href="#" id="options">Options and enabled sites</a></p>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Copy as Markdown for OpenClaw</title>
+    <style>
+      body {
+        font: 14px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+        margin: 28px auto;
+        padding: 0 20px;
+        max-width: 620px;
+        color-scheme: light dark;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 15px;
+        margin: 28px 0 6px;
+      }
+      fieldset {
+        border: 0;
+        margin: 0 0 14px;
+        padding: 0;
+      }
+      legend {
+        font-weight: 600;
+        padding: 0;
+        margin-bottom: 4px;
+      }
+      label {
+        display: block;
+        margin: 3px 0;
+      }
+      small,
+      .muted {
+        opacity: 0.7;
+      }
+      small {
+        display: block;
+        margin-left: 22px;
+      }
+      select,
+      input[type='text'],
+      button {
+        font: inherit;
+      }
+      input[type='text'] {
+        width: 300px;
+        padding: 4px 6px;
+      }
+      ol {
+        padding-left: 20px;
+      }
+      #sites {
+        list-style: none;
+        padding: 0;
+        margin: 6px 0 10px;
+      }
+      #sites li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 3px 0;
+      }
+      #sites code {
+        font-size: 13px;
+      }
+      #siteError {
+        color: #b42318;
+      }
+      #saved {
+        opacity: 0;
+        transition: opacity 0.2s;
+        font-size: 12px;
+      }
+      #saved.on {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Copy as Markdown for OpenClaw</h1>
+    <p class="muted">Unofficial. Not affiliated with the OpenClaw project.</p>
+
+    <h2>Where it runs</h2>
+    <p>
+      The extension only runs on sites you switch it on for. To switch it on:
+    </p>
+    <ol>
+      <li>Open your OpenClaw page.</li>
+      <li>Click the puzzle-piece icon at the top right of the browser, then <b>Copy as Markdown for OpenClaw</b>.</li>
+      <li>Click <b>Enable on this site</b> and allow the browser's prompt.</li>
+    </ol>
+    <p>Or type the address here:</p>
+    <p>
+      <input type="text" id="site" placeholder="https://your-openclaw-address" spellcheck="false" />
+      <button id="addSite">Add site</button>
+      <span id="siteError" role="alert"></span>
+    </p>
+    <ul id="sites"></ul>
+
+    <h2>How to use it</h2>
+    <p>
+      Select text in a message. A <b>Copy as Markdown</b> button appears under the selection; click it and paste. You
+      can also right-click the selection, or press the keyboard shortcut (set at
+      <code>chrome://extensions/shortcuts</code>).
+    </p>
+
+    <h2>Options</h2>
+    <fieldset>
+      <legend>Markdown flavour</legend>
+      <label><input type="radio" name="flavor" value="discord" /> Discord</label>
+      <small>h4+ headings become bold, no horizontal rules, tables converted (below).</small>
+      <label><input type="radio" name="flavor" value="gfm" /> Standard (GitHub-flavoured)</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Tables</legend>
+      <select id="tables">
+        <option value="auto">Auto (bullets for Discord, Markdown table otherwise)</option>
+        <option value="bullets">Bullet list</option>
+        <option value="code">Aligned text in a code block</option>
+        <option value="gfm">Markdown table</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>Right-click</legend>
+      <label><input type="radio" name="nativeMenu" value="selection" /> Right-click on selected text opens the browser menu</label>
+      <small>Shift + right-click still gives OpenClaw's own menu.</small>
+      <label><input type="radio" name="nativeMenu" value="shift" /> Only Shift + right-click opens the browser menu</label>
+      <label><input type="radio" name="nativeMenu" value="off" /> Leave right-click alone</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Extras</legend>
+      <label><input type="checkbox" id="pill" /> Show a "Copy as Markdown" button next to selected text</label>
+      <label><input type="checkbox" id="ctrlC" /> Ctrl+C copies Markdown too</label>
+      <small>Applies to text selected in the page, not to text boxes.</small>
+      <label><input type="checkbox" id="wrapLinks" /> Wrap links in &lt;&gt; so Discord doesn't embed previews</label>
+      <label>
+        Warn when the copy is longer than
+        <select id="limit">
+          <option value="2000">2,000 characters (Discord)</option>
+          <option value="4000">4,000 characters (Discord Nitro)</option>
+          <option value="0">never</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <span id="saved">Saved</span>
+    <script src="options.js"></script>
+  </body>
+</html>
